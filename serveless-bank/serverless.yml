@@ -19,6 +19,6 @@ functions:
     handler: bin/create_client
     role:  ${ssm:dev-parameter-users-bank-role-arn} 
     events:
-      - httpApi:
+      - http:
           path: /create
           method: post

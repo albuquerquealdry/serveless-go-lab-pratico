@@ -38,15 +38,12 @@ func HandleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (
 		}, nil
 	}
 
-	ID := uuid.New().String()
-	currentTime := time.Now().String()
-	ClientSize := currentTime
 	sess := session.Must(session.NewSession())
 	svc := dynamodb.New(sess)
 
 	item := map[string]*dynamodb.AttributeValue{
 		"id": {
-			S: aws.String(ID),
+			S: aws.String(uuid.New().String()),
 		},
 		"name": {
 			S: aws.String(user.Name),
@@ -58,7 +55,7 @@ func HandleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (
 			S: aws.String(user.Age),
 		},
 		"clientsize": {
-			S: aws.String(ClientSize),
+			S: aws.String(time.Now().String()),
 		},
 		"statusaccount": {
 			BOOL: aws.Bool(false),
