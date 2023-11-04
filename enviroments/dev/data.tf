@@ -25,3 +25,16 @@ data "aws_iam_policy_document" "policy_dynamodb_lambda_bank_create" {
     ]
   }
 }
+
+data "aws_iam_policy_document" "policy_dynamodb_lambda_bank_moderator_update" {
+
+  statement {
+    sid = "SidToOverride"
+
+    actions = ["dynamodb:PutItem","dynamodb:UpdateItem" ]
+
+    resources = [
+        "${module.dynamodb_table_bank.arn}"
+    ]
+  }
+}

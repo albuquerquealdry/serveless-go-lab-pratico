@@ -60,8 +60,8 @@ func HandleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (
 		"statusaccount": {
 			BOOL: aws.Bool(false),
 		},
-		"ebankActive": {
-			BOOL: aws.Bool(false),
+		"ebankCode": {
+			S: aws.String("0"),
 		},
 		"balance": {
 			N: aws.String(strconv.Itoa(0)),

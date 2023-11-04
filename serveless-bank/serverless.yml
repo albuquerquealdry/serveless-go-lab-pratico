@@ -19,6 +19,26 @@ functions:
     handler: bin/create_client
     role:  ${ssm:dev-parameter-users-bank-role-arn} 
     events:
-      - http:
-          path: /create
+      - httpApi:
+          path: /client/create
+          method: post
+
+  sendPhoto:
+    environment:
+      DYNAMODB_USERS_TABLE:  ${ssm:dev-parameter-users-bank-bank-table-table_name}
+    handler: bin/send_photo
+    role:  ${ssm:dev-parameter-users-bank-role-arn} 
+    events:
+      - httpApi:
+          path: /client/sendPhoto
+          method: post
+
+  moderator:
+    environment:
+      DYNAMODB_USERS_TABLE:  ${ssm:dev-parameter-users-bank-bank-table-table_name}
+    handler: bin/change_status
+    role:  ${ssm:dev-parameter-users-bank-moderator-role-arn} 
+    events:
+      - httpApi:
+          path: /modetator/cliente/authorize
           method: post
